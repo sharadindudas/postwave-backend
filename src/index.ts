@@ -1,10 +1,5 @@
-import "dotenv/config";
-import express from "express";
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.json());
+import { PORT } from "./config";
+import app from "./app";
 
 app.get("/", (req, res) => {
   res.json({ message: "API is running! 🚀" });
