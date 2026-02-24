@@ -12,10 +12,17 @@ A full-stack newsletter platform for creators. Creators can build publications, 
 POST   /api/v1/auth/sign-up/email
 POST   /api/v1/auth/sign-in/email
 POST   /api/v1/auth/sign-out
-GET    /api/v1/auth/session
-POST   /api/v1/auth/verify-email
-POST   /api/v1/auth/forget-password
+GET    /api/v1/auth/get-session
+
+POST   /api/v1/auth/send-verification-email
+GET    /api/v1/auth/verify-email
+
+POST   /api/v1/auth/request-password-reset
 POST   /api/v1/auth/reset-password
+
+PATCH  /api/v1/auth/update-user
+POST   /api/v1/auth/change-password
+POST   /api/v1/auth/delete-user
 ```
 
 ---

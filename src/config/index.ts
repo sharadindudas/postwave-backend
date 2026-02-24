@@ -7,11 +7,13 @@ const requireEnv = (key: string): string => {
 };
 
 export const config = {
+  nodeEnv: requireEnv("NODE_ENV"),
   port: process.env.PORT || 3000,
   databaseUrl: requireEnv("DATABASE_URL"),
   betterAuthSecret: requireEnv("BETTER_AUTH_SECRET"),
   betterAuthUrl: requireEnv("BETTER_AUTH_URL"),
   upstashRedisUrl: requireEnv("UPSTASH_REDIS_REST_URL"),
   upstashRedisToken: requireEnv("UPSTASH_REDIS_REST_TOKEN"),
-  resendApiKey: requireEnv("RESEND_API_KEY")
+  resendApiKey: requireEnv("RESEND_API_KEY"),
+  emailSendingDomain: requireEnv("EMAIL_SENDING_DOMAIN")
 };
