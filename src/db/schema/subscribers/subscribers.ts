@@ -6,13 +6,13 @@ export const subscriptionTierEnum = pgEnum("subscriber_tier", ["free", "premium"
 
 export const subscribers = pgTable("subscribers", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  publication_id: uuid("publication_id")
-    .references(() => publications.id)
+  publicationId: uuid("publication_id")
+    .references(() => publications.id, { onDelete: "cascade" })
     .notNull(),
   email: text("email").notNull(),
   status: subscriptionStatusEnum("status").default("active").notNull(),
   tier: subscriptionTierEnum("tier").default("free").notNull(),
-  subscribed_at: timestamp("subscribed_at").defaultNow(),
-  unsubscribed_at: timestamp("unsubscribed_at"),
-  created_at: timestamp("created_at").notNull().defaultNow()
+  subscribedAt: timestamp("subscribed_at").defaultNow(),
+  unsubscribedAt: timestamp("unsubscribed_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow()
 });

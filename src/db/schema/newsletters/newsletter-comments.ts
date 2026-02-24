@@ -6,12 +6,12 @@ import { newsletters } from "./newsletters";
 export const newsletterComments = pgTable("newsletter_comments", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
   newsletter_id: uuid("newsletter_id")
-    .references(() => newsletters.id)
+    .references(() => newsletters.id, { onDelete: "cascade" })
     .notNull(),
   parent_id: uuid("parent_id"),
   content: text("content").notNull(),
-  created_by: uuid("created_by")
-    .references(() => users.id)
+  created_by: text("created_by")
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
   ...timestamps
 });

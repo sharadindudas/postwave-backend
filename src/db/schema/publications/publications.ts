@@ -4,8 +4,8 @@ import { users } from "../users";
 
 export const publications = pgTable("publications", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  owner_id: uuid("owner_id")
-    .references(() => users.id)
+  ownerId: text("owner_id")
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
   name: text("name").notNull(),
   description: text("description"),

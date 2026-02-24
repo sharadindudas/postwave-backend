@@ -6,8 +6,8 @@ export const domainStatusEnum = pgEnum("publication_domain_status", ["active", "
 
 export const publicationDomains = pgTable("publication_domains", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  publication_id: uuid("publication_id")
-    .references(() => publications.id)
+  publicationId: uuid("publication_id")
+    .references(() => publications.id, { onDelete: "cascade" })
     .notNull(),
   domain: text("domain").notNull().unique(),
   status: domainStatusEnum("status").default("pending"),

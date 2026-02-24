@@ -1,13 +1,13 @@
-import { pgTable, text, uuid, boolean } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text } from "drizzle-orm/pg-core";
 import { timestamps } from "../common";
+import { sql } from "drizzle-orm";
 
 export const users = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom().notNull(),
+  id: text("id").primaryKey().notNull(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
-  password: text("password").notNull(),
-  is_verified: boolean("is_verified").default(false).notNull(),
-  avatar: text("avatar"),
+  emailVerified: boolean("email_verified").notNull().default(false),
+  image: text("image"),
   bio: text("bio"),
   x: text("x"),
   facebook: text("facebook"),

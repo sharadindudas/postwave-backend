@@ -6,14 +6,14 @@ export const newsletterStatusEnum = pgEnum("newsletter_status", ["draft", "sched
 
 export const newsletters = pgTable("newsletters", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  publication_id: uuid("publication_id")
-    .references(() => publications.id)
+  publicationId: uuid("publication_id")
+    .references(() => publications.id, { onDelete: "cascade" })
     .notNull(),
   slug: text("slug").notNull(),
   status: newsletterStatusEnum("status").default("draft").notNull(),
-  current_version_id: uuid("current_version_id"),
-  published_version_id: uuid("published_version_id"),
-  scheduled_at: timestamp("scheduled_at"),
-  email_sent_at: timestamp("email_sent_at"),
+  currentVersionId: uuid("current_version_id"),
+  publishedVersionId: uuid("published_version_id"),
+  scheduledAt: timestamp("scheduled_at"),
+  emailSentAt: timestamp("email_sent_at"),
   ...timestamps
 });

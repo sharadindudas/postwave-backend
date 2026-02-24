@@ -16,16 +16,19 @@
     "@types/bun": "latest",
     "@types/express": "^5.0.6",
     "drizzle-kit": "^0.31.9",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "ts-node": "^10.9.2"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@upstash/redis": "^1.36.2",
+    "better-auth": "^1.4.19",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
-    "postgres": "^3.4.8"
+    "postgres": "^3.4.8",
+    "resend": "^6.9.2"
   }
 }
