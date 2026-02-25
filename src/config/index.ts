@@ -9,6 +9,7 @@ const requireEnv = (key: string): string => {
 export const config = {
   nodeEnv: requireEnv("NODE_ENV"),
   port: process.env.PORT || 3000,
+  frontendUrl: requireEnv("FRONTEND_URL"),
   databaseUrl: requireEnv("DATABASE_URL"),
   betterAuthSecret: requireEnv("BETTER_AUTH_SECRET"),
   betterAuthUrl: requireEnv("BETTER_AUTH_URL"),
