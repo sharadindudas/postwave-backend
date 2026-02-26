@@ -1,6 +1,5 @@
 import { boolean, pgTable, text } from "drizzle-orm/pg-core";
 import { timestamps } from "../common";
-import { sql } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: text("id").primaryKey().notNull(),

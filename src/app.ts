@@ -6,6 +6,7 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middlware";
 import { auth } from "./modules/auth/auth.config";
+import userRouter from "./modules/users/users.routes";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(helmet());
 app.set("trust proxy", true);
 
 app.all("/api/v1/auth/*splat", toNodeHandler(auth));
+app.use("/api/v1/users", userRouter);
 
 app.use(notfoundMiddleware);
 app.use(errorMiddleware);

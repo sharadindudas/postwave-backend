@@ -16,5 +16,8 @@ export const config = {
   upstashRedisUrl: requireEnv("UPSTASH_REDIS_REST_URL"),
   upstashRedisToken: requireEnv("UPSTASH_REDIS_REST_TOKEN"),
   resendApiKey: requireEnv("RESEND_API_KEY"),
-  emailSendingDomain: requireEnv("EMAIL_SENDING_DOMAIN")
+  emailSendingDomain: requireEnv("EMAIL_SENDING_DOMAIN"),
+  cloudinaryCloudName: requireEnv("CLOUDINARY_CLOUD_NAME"),
+  cloudinaryApiKey: requireEnv("CLOUDINARY_API_KEY"),
+  cloudinaryApiSecret: requireEnv("CLOUDINARY_API_SECRET")
 };
