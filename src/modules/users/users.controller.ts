@@ -1,4 +1,4 @@
-import { AsyncHandler } from "../../lib/handlers";
+import { AsyncHandler, ErrorHandler } from "../../lib/handlers";
 import { usersService } from "./users.service";
 import { UpdateUserSchema } from "./users.validator";
 
@@ -23,6 +23,7 @@ class UsersController {
     });
   });
   updateAvatar = AsyncHandler(async (req, res, next) => {
+    if (!req.file) throw new ErrorHandler("Please provide an avatar image", 400);
     console.log(req.file);
 
     res.status(200).json({

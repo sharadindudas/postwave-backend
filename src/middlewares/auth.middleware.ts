@@ -1,6 +1,5 @@
-import type { Request, Response, NextFunction } from "express";
-import { auth } from "../modules/auth/auth.config";
 import { AsyncHandler, ErrorHandler } from "../lib/handlers";
+import { auth } from "../modules/auth/auth.config";
 
 export const requireAuth = AsyncHandler(async (req, res, next) => {
   const headers = new Headers();

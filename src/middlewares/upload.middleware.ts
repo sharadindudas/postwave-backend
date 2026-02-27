@@ -1,16 +1,53 @@
 import multer from "multer";
 import { ErrorHandler } from "../lib/handlers";
 
-const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const MAX_FILE_SIZE = 2 * 1024 * 1024;
+const DEFAULT_ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const DEFAULT_MAX_FILE_SIZE = 2 * 1024 * 1024;
 
-export const uploadMiddleware = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: MAX_FILE_SIZE },
-  fileFilter: (req, file, cb) => {
-    if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
-      return cb(new ErrorHandler("Only JPEG, PNG and WebP images are allowed", 400));
+interface UploadMiddlewareOptions {
+  mimeTypes?: string[];
+  maxFileSize?: number;
+}
+
+type SingleUploadConfig = {
+  type: "single";
+  fieldName: string;
+};
+
+type MultipleUploadConfig = {
+  type: "multiple";
+  fieldName: string;
+  maxCount?: number;
+};
+
+type FieldsUploadConfig = {
+  type: "fields";
+  fields: { name: string; maxCount?: number }[];
+};
+
+type UploadConfig = SingleUploadConfig | MultipleUploadConfig | FieldsUploadConfig;
+
+export const createUploadMiddleware = (config: UploadConfig, options: UploadMiddlewareOptions = {}) => {
+  const allowedMimeTypes = options.mimeTypes ?? DEFAULT_ALLOWED_MIME_TYPES;
+  const maxFileSize = options.maxFileSize ?? DEFAULT_MAX_FILE_SIZE;
+
+  const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: maxFileSize },
+    fileFilter: (req, file, cb) => {
+      if (!allowedMimeTypes.includes(file.mimetype)) {
+        return cb(new ErrorHandler(`Invalid file type. Allowed types: ${allowedMimeTypes.join(", ")}`, 400));
+      }
+      cb(null, true);
     }
-    cb(null, true);
+  });
+
+  switch (config.type) {
+    case "single":
+      return upload.single(config.fieldName);
+    case "multiple":
+      return upload.array(config.fieldName, config.maxCount);
+    case "fields":
+      return upload.fields(config.fields);
   }
-}).single("avatar");
+};

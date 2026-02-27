@@ -50,8 +50,8 @@ export const auth = betterAuth({
   },
   user: {
     additionalFields: {
-      avatar: { type: "string" },
       bio: { type: "string" },
+      imagePublicId: { type: "string" },
       x: { type: "string" },
       facebook: { type: "string" },
       linkedin: { type: "string" },
