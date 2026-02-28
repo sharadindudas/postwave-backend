@@ -5,15 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "start": "bun src/index.ts",
+    "start": "node dist/index.js",
+    "check": "tsc --noEmit",
+    "build": "tsc",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
-    "db:migrate": "bun src/migrate.ts",
+    "db:migrate": "ts-node src/migrate.ts",
     "db:studio": "drizzle-kit studio",
-    "format": "prettier --write .",
-    "build": "bun build src/index.ts --outdir dist --target bun",
-    "start:prod": "bun dist/index.js",
-    "check": "tsc --noEmit"
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -45,3 +44,4 @@
     "winston": "^3.19.0"
   }
 }
+
