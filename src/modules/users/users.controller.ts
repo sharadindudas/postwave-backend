@@ -24,11 +24,15 @@ class UsersController {
   });
   updateAvatar = AsyncHandler(async (req, res, next) => {
     if (!req.file) throw new ErrorHandler("Please provide an avatar image", 400);
-    console.log(req.file);
+
+    const userId = res.locals.user.id;
+
+    const updatedUser = await usersService.updateAvatar(userId, req.file);
 
     res.status(200).json({
       success: true,
-      message: "Uploaded avatar successfully"
+      message: "Avatar updated successfully",
+      data: updatedUser
     });
   });
 }

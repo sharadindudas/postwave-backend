@@ -7,9 +7,9 @@ interface SendEmailOptions {
   html: string;
 }
 
-export const resend = new Resend(config.resendApiKey);
+const resend = new Resend(config.resendApiKey);
 
-export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
+export const sendEmail = async (options: SendEmailOptions): Promise<boolean> => {
   try {
     const { error } = await resend.emails.send({
       from: config.emailSendingDomain,
@@ -25,4 +25,4 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
     console.error("Email service unreachable:", err);
     return false;
   }
-}
+};

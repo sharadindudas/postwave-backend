@@ -1,4 +1,4 @@
-import { auth } from "../modules/auth/auth.config";
+import { auth } from "../lib/auth";
 
 declare global {
   namespace Express {

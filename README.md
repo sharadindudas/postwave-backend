@@ -26,7 +26,7 @@ A full-stack newsletter platform for creators. Creators can build publications, 
 ```
 ✅ GET    /api/v1/users/me (Current user profile)
 ✅ PATCH  /api/v1/users/me (Update user profile)
-PATCH  /api/v1/users/me/avatar (Upload/update avatar)
+✅ PATCH  /api/v1/users/me/avatar (Upload/update avatar)
 ```
 
 ---

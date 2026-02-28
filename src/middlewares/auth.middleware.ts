@@ -1,5 +1,5 @@
+import { auth } from "../lib/auth";
 import { AsyncHandler, ErrorHandler } from "../lib/handlers";
-import { auth } from "../modules/auth/auth.config";
 
 export const requireAuth = AsyncHandler(async (req, res, next) => {
   const headers = new Headers();

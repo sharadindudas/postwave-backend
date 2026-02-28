@@ -2,32 +2,9 @@ import multer from "multer";
 import { ErrorHandler } from "../lib/handlers";
 
 const DEFAULT_ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const DEFAULT_MAX_FILE_SIZE = 2 * 1024 * 1024;
+const DEFAULT_MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-interface UploadMiddlewareOptions {
-  mimeTypes?: string[];
-  maxFileSize?: number;
-}
-
-type SingleUploadConfig = {
-  type: "single";
-  fieldName: string;
-};
-
-type MultipleUploadConfig = {
-  type: "multiple";
-  fieldName: string;
-  maxCount?: number;
-};
-
-type FieldsUploadConfig = {
-  type: "fields";
-  fields: { name: string; maxCount?: number }[];
-};
-
-type UploadConfig = SingleUploadConfig | MultipleUploadConfig | FieldsUploadConfig;
-
-export const createUploadMiddleware = (config: UploadConfig, options: UploadMiddlewareOptions = {}) => {
+export const uploadMiddleware = (config: UploadConfig, options: UploadMiddlewareOptions = {}) => {
   const allowedMimeTypes = options.mimeTypes ?? DEFAULT_ALLOWED_MIME_TYPES;
   const maxFileSize = options.maxFileSize ?? DEFAULT_MAX_FILE_SIZE;
 

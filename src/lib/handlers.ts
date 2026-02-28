@@ -1,10 +1,10 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 
-const AsyncHandler = (fn: RequestHandler) => (req: Request, res: Response, next: NextFunction) => {
+export const AsyncHandler = (fn: RequestHandler) => (req: Request, res: Response, next: NextFunction) => {
   return Promise.resolve(fn(req, res, next)).catch((err) => next(err));
 };
 
-class ErrorHandler extends Error {
+export class ErrorHandler extends Error {
   constructor(
     public message: string,
     public statusCode: number
@@ -14,5 +14,3 @@ class ErrorHandler extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
-export { AsyncHandler, ErrorHandler };

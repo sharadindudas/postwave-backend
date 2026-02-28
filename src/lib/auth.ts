@@ -1,9 +1,10 @@
 import { betterAuth } from "better-auth";
+import { config } from "../config";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { config } from "../../config";
-import { db } from "../../db";
-import { accounts, sessions, users, verifications } from "../../db/schema";
-import { resend, sendEmail } from "../../lib/resend";
+import { db } from "../db";
+import { users, sessions, accounts, verifications } from "../db/schema";
+import { sendEmail } from "./resend";
+import { openAPI } from "better-auth/plugins";
 
 export const auth = betterAuth({
   baseURL: config.betterAuthUrl,
@@ -65,7 +66,8 @@ export const auth = betterAuth({
     database: {
       generateId: () => crypto.randomUUID()
     }
-  }
+  },
+  plugins: [openAPI()]
 });
 
 export type Auth = typeof auth;

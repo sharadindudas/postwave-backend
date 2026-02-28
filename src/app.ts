@@ -2,10 +2,10 @@ import { toNodeHandler } from "better-auth/node";
 import compression from "compression";
 import express from "express";
 import helmet from "helmet";
+import { auth } from "./lib/auth";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middlware";
-import { auth } from "./modules/auth/auth.config";
 import userRouter from "./modules/users/users.routes";
 
 const app = express();
