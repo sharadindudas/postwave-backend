@@ -12,6 +12,7 @@ class UsersController {
   });
   updateMe = AsyncHandler(async (req, res, next) => {
     const userId = res.locals.user.id;
+
     const updateUserPayload = res.locals.validatedData as UpdateUserSchema;
 
     const updatedUser = await usersService.updateMe(userId, updateUserPayload);
