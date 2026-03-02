@@ -8,12 +8,13 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middlware";
 import userRouter from "./modules/users/users.routes";
+import { config } from "./config";
 
 const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://yourdomain.com"],
+    origin: [config.frontendUrl],
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     credentials: true
