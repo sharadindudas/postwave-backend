@@ -1,6 +1,7 @@
 import { toNodeHandler } from "better-auth/node";
 import compression from "compression";
 import express from "express";
+import cors from "cors";
 import helmet from "helmet";
 import { auth } from "./lib/auth";
 import { errorMiddleware } from "./middlewares/error.middleware";
@@ -10,6 +11,14 @@ import userRouter from "./modules/users/users.routes";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://yourdomain.com"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    credentials: true
+  })
+);
 app.use(morganMiddleware);
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));

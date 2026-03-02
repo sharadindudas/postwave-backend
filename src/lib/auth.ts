@@ -59,7 +59,13 @@ export const auth = betterAuth({
       instagram: { type: "string" },
       youtube: { type: "string" },
       threads: { type: "string" },
-      tiktok: { type: "string" }
+      tiktok: { type: "string" },
+      isOnboarded: { type: "boolean" },
+      onboardingStep: { type: "number" },
+      journey: { type: "string" },
+      platformsUsed: { type: "string" },
+      source: { type: "string" },
+      goals: { type: "string" }
     }
   },
   advanced: {

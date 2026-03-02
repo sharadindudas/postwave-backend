@@ -1,4 +1,4 @@
-import { boolean, pgTable, text } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, text } from "drizzle-orm/pg-core";
 import { timestamps } from "../common";
 
 export const users = pgTable("users", {
@@ -16,5 +16,11 @@ export const users = pgTable("users", {
   youtube: text("youtube"),
   threads: text("threads"),
   tiktok: text("tiktok"),
+  isOnboarded: boolean("is_onboarded").notNull().default(false),
+  onboardingStep: integer("onboarding_step").notNull().default(1),
+  journey: text("journey"),
+  platformsUsed: text("platforms_used"),
+  source: text("source"),
+  goals: text("goals"),
   ...timestamps
 });
