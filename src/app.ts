@@ -9,6 +9,7 @@ import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middlware";
 import userRouter from "./modules/users/users.routes";
 import { config } from "./config";
+import healthRouter from "./modules/health/health.routes";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.set("trust proxy", true);
 
 app.all("/api/v1/auth/*splat", toNodeHandler(auth));
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/health", healthRouter);
 
 app.use(notfoundMiddleware);
 app.use(errorMiddleware);
