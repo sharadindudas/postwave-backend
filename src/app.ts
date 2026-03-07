@@ -9,6 +9,10 @@ import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middleware";
 import userRouter from "./modules/users/users.routes";
+<<<<<<< HEAD
+=======
+import { config } from "./config";
+>>>>>>> b0d09abfacb85d3a4b532337a80d5aeac4e9d4c7
 import healthRouter from "./modules/health/health.routes";
 
 const app = express();
@@ -30,6 +34,7 @@ app.use(morganMiddleware);
 app.use("/health", healthRouter);
 app.all("/api/v1/auth/*splat", toNodeHandler(auth));
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/health", healthRouter);
 
 app.use(notfoundMiddleware);
 app.use(errorMiddleware);
