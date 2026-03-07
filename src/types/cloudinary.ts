@@ -1,4 +1,4 @@
-import { UploadApiOptions } from "cloudinary";
+import { type UploadApiOptions } from "cloudinary";
 
 export interface UploadOptions {
   folder: UploadApiOptions["folder"];

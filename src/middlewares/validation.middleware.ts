@@ -1,7 +1,7 @@
 import * as v from "valibot";
-import { AsyncHandler } from "../lib/handlers";
+import { AsyncHandler } from "../utils/handlers";
 
-type RequestLocation = "body" | "query" | "params" | "headers" | "cookies" | "file";
+type RequestLocation = "body" | "query" | "params" | "headers" | "cookies";
 
 export const validationMiddleware = (location: RequestLocation, schema: v.ObjectSchema<any, any>) =>
   AsyncHandler(async (req, res, next) => {

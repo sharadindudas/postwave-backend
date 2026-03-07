@@ -1,7 +1,7 @@
 import { Redis } from "@upstash/redis";
-import { config } from "../config";
+import { UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from "../config";
 
 export const redis = new Redis({
-  url: config.upstashRedisUrl,
-  token: config.upstashRedisToken
+  url: UPSTASH_REDIS_REST_URL,
+  token: UPSTASH_REDIS_REST_TOKEN
 });

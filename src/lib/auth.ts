@@ -1,18 +1,18 @@
 import { betterAuth } from "better-auth";
-import { config } from "../config";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../db";
-import { users, sessions, accounts, verifications } from "../db/schema";
+import { accounts, sessions, users, verifications } from "../db/schema";
 import { sendEmail } from "./resend";
-import { openAPI } from "better-auth/plugins";
+import { BETTER_AUTH_SECRET, BETTER_AUTH_URL, FRONTEND_URL } from "../config";
 
 export const auth = betterAuth({
-  baseURL: config.betterAuthUrl,
   basePath: "/api/v1/auth",
-  trustedOrigins: [config.frontendUrl],
-  secret: config.betterAuthSecret,
+  baseURL: BETTER_AUTH_URL,
+  secret: BETTER_AUTH_SECRET,
+  trustedOrigins: [FRONTEND_URL],
   database: drizzleAdapter(db, {
     provider: "pg",
+    camelCase: false,
     schema: {
       user: users,
       session: sessions,
@@ -72,8 +72,5 @@ export const auth = betterAuth({
     database: {
       generateId: () => crypto.randomUUID()
     }
-  },
-  plugins: [openAPI()]
+  }
 });
-
-export type Auth = typeof auth;

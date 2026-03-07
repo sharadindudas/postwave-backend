@@ -1,32 +1,22 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db";
 import { users } from "../../db/schema";
-import { UpdateUserSchema } from "./users.validator";
-import { ErrorHandler } from "../../lib/handlers";
+import type { UpdateUserSchema } from "./users.validator";
+import { ErrorHandler } from "../../utils/handlers";
 import { deleteFromCloudinary, uploadToCloudinary } from "../../lib/cloudinary";
 
 class UsersService {
   async updateMe(userId: string, updateUserPayload: UpdateUserSchema) {
     const [updatedUser] = await db.update(users).set(updateUserPayload).where(eq(users.id, userId)).returning();
-    if (!updatedUser) {
-      throw new ErrorHandler("User not found", 404);
-    }
     return updatedUser;
   }
 
-  async updateAvatar(userId: string, file: Express.Multer.File) {
-    const [currentUser] = await db.select().from(users).where(eq(users.id, userId));
-
-    if (!currentUser) {
-      throw new ErrorHandler("User not found", 404);
+  async updateAvatar(user: typeof users.$inferSelect, file: Express.Multer.File) {
+    if (user.imagePublicId) {
+      await deleteFromCloudinary(user.imagePublicId);
     }
 
-    if (currentUser.imagePublicId) {
-      await deleteFromCloudinary(currentUser.imagePublicId);
-    }
-
-    const folderPath = ["users", userId, "avatars"].join("/");
-
+    const folderPath = ["users", user.id, "avatars"].join("/");
     const { url, publicId } = await uploadToCloudinary(file, {
       folder: folderPath,
       transformation: [
@@ -35,8 +25,7 @@ class UsersService {
       ]
     });
 
-    const [updatedUser] = await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, userId)).returning();
-
+    const [updatedUser] = await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, user.id)).returning();
     return updatedUser;
   }
 }

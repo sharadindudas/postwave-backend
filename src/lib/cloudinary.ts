@@ -1,11 +1,11 @@
-import { v2 as cloudinary, UploadApiOptions } from "cloudinary";
-import { config } from "../config";
-import { CloudinaryUploadResult, UploadOptions } from "../types/cloudinary";
+import { v2 as cloudinary, type UploadApiOptions } from "cloudinary";
+import type { CloudinaryUploadResult, UploadOptions } from "../types/cloudinary";
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME } from "../config";
 
 cloudinary.config({
-  cloud_name: config.cloudinaryCloudName,
-  api_key: config.cloudinaryApiKey,
-  api_secret: config.cloudinaryApiSecret
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET
 });
 
 export const uploadToCloudinary = async (file: Express.Multer.File, options: UploadOptions): Promise<CloudinaryUploadResult> => {

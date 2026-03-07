@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { config } from "../config";
+import { EMAIL_SENDING_DOMAIN, RESEND_API_KEY } from "../config";
 
 interface SendEmailOptions {
   to: string;
@@ -7,12 +7,12 @@ interface SendEmailOptions {
   html: string;
 }
 
-const resend = new Resend(config.resendApiKey);
+const resend = new Resend(RESEND_API_KEY);
 
 export const sendEmail = async (options: SendEmailOptions): Promise<boolean> => {
   try {
     const { error } = await resend.emails.send({
-      from: config.emailSendingDomain,
+      from: EMAIL_SENDING_DOMAIN,
       ...options
     });
     if (error) {

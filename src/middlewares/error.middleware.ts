@@ -1,6 +1,6 @@
-import { ErrorRequestHandler } from "express";
+import { type ErrorRequestHandler } from "express";
 import { logger } from "../lib/logger";
-import { ErrorHandler } from "../lib/handlers";
+import { ErrorHandler } from "../utils/handlers";
 import { ValiError } from "valibot";
 import { MulterError } from "multer";
 

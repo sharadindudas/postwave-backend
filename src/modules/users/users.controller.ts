@@ -1,6 +1,7 @@
-import { AsyncHandler, ErrorHandler } from "../../lib/handlers";
+import type { users } from "../../db/schema";
+import { AsyncHandler, ErrorHandler } from "../../utils/handlers";
 import { usersService } from "./users.service";
-import { UpdateUserSchema } from "./users.validator";
+import type { UpdateUserSchema } from "./users.validator";
 
 class UsersController {
   getMe = AsyncHandler(async (req, res, next) => {
@@ -12,7 +13,6 @@ class UsersController {
   });
   updateMe = AsyncHandler(async (req, res, next) => {
     const userId = res.locals.user.id;
-
     const updateUserPayload = res.locals.validatedData as UpdateUserSchema;
 
     const updatedUser = await usersService.updateMe(userId, updateUserPayload);
@@ -24,11 +24,10 @@ class UsersController {
     });
   });
   updateAvatar = AsyncHandler(async (req, res, next) => {
-    if (!req.file) throw new ErrorHandler("Please provide an avatar image", 400);
+    const avatarImage = res.locals.uploadedFiles?.[0] as Express.Multer.File;
+    const currentUser = res.locals.user as typeof users.$inferSelect;
 
-    const userId = res.locals.user.id;
-
-    const updatedUser = await usersService.updateAvatar(userId, req.file);
+    const updatedUser = await usersService.updateAvatar(currentUser, avatarImage);
 
     res.status(200).json({
       success: true,

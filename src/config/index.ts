@@ -1,23 +1,15 @@
 import "dotenv/config";
 
-const requireEnv = (key: string): string => {
-  const value = process.env[key];
-  if (!value) throw new Error(`Missing required environment variable: ${key}`);
-  return value;
-};
-
-export const config = {
-  nodeEnv: requireEnv("NODE_ENV"),
-  port: process.env.PORT || 3000,
-  frontendUrl: requireEnv("FRONTEND_URL"),
-  databaseUrl: requireEnv("DATABASE_URL"),
-  betterAuthSecret: requireEnv("BETTER_AUTH_SECRET"),
-  betterAuthUrl: requireEnv("BETTER_AUTH_URL"),
-  upstashRedisUrl: requireEnv("UPSTASH_REDIS_REST_URL"),
-  upstashRedisToken: requireEnv("UPSTASH_REDIS_REST_TOKEN"),
-  resendApiKey: requireEnv("RESEND_API_KEY"),
-  emailSendingDomain: requireEnv("EMAIL_SENDING_DOMAIN"),
-  cloudinaryCloudName: requireEnv("CLOUDINARY_CLOUD_NAME"),
-  cloudinaryApiKey: requireEnv("CLOUDINARY_API_KEY"),
-  cloudinaryApiSecret: requireEnv("CLOUDINARY_API_SECRET")
-};
+export const NODE_ENV = process.env.NODE_ENV!,
+  PORT = Number(process.env.PORT!),
+  DATABASE_URL = process.env.DATABASE_URL!,
+  BETTER_AUTH_URL = process.env.BETTER_AUTH_URL!,
+  BETTER_AUTH_SECRET = process.env.BETTER_AUTH_SECRET!,
+  RESEND_API_KEY = process.env.RESEND_API_KEY!,
+  EMAIL_SENDING_DOMAIN = process.env.EMAIL_SENDING_DOMAIN!,
+  FRONTEND_URL = process.env.FRONTEND_URL!,
+  CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY!,
+  CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET!,
+  CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME!,
+  UPSTASH_REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL!,
+  UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN!;

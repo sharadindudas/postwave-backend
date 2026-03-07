@@ -6,6 +6,7 @@ declare global {
       user: typeof auth.$Infer.Session.user;
       session: typeof auth.$Infer.Session.session;
       validatedData?: unknown;
+      uploadedFiles?: Express.Multer.File[];
     }
   }
 }

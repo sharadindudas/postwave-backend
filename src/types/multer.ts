@@ -1,22 +1,22 @@
-interface UploadMiddlewareOptions {
+export interface UploadMiddlewareOptions {
   mimeTypes?: string[];
   maxFileSize?: number;
 }
 
-interface SingleUploadConfig {
+export interface SingleUploadConfig {
   type: "single";
   fieldName: string;
 }
 
-interface MultipleUploadConfig {
+export interface MultipleUploadConfig {
   type: "multiple";
   fieldName: string;
   maxCount?: number;
 }
 
-interface FieldsUploadConfig {
+export interface FieldsUploadConfig {
   type: "fields";
   fields: { name: string; maxCount?: number }[];
 }
 
-type UploadConfig = SingleUploadConfig | MultipleUploadConfig | FieldsUploadConfig;
+export type UploadConfig = SingleUploadConfig | MultipleUploadConfig | FieldsUploadConfig;

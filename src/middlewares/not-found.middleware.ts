@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import { type RequestHandler } from "express";
 
 export const notfoundMiddleware: RequestHandler = (req, res, _next) => {
   res.status(404).json({

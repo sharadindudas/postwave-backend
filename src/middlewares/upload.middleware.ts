@@ -1,5 +1,6 @@
 import multer from "multer";
-import { ErrorHandler } from "../lib/handlers";
+import { ErrorHandler } from "../utils/handlers";
+import type { UploadConfig, UploadMiddlewareOptions } from "../types/multer";
 
 const DEFAULT_ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const DEFAULT_MAX_FILE_SIZE = 5 * 1024 * 1024;
