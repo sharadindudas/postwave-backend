@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db";
 import { users } from "../../db/schema";
-import type { UpdateUserSchema } from "./users.validator";
+import type { UpdateUserOnboardingSchema, UpdateUserSchema } from "./users.validator";
 import { ErrorHandler } from "../../utils/handlers";
 import { deleteFromCloudinary, uploadToCloudinary } from "../../lib/cloudinary";
 
@@ -26,6 +26,11 @@ class UsersService {
     });
 
     const [updatedUser] = await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, user.id)).returning();
+    return updatedUser;
+  }
+
+  async updateUserOnboarding(userId: string, updateUserOnboardingPayload: UpdateUserOnboardingSchema) {
+    const [updatedUser] = await db.update(users).set(updateUserOnboardingPayload).where(eq(users.id, userId)).returning();
     return updatedUser;
   }
 }

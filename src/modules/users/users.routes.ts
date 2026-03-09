@@ -2,7 +2,7 @@ import { Router } from "express";
 import { usersController } from "./users.controller";
 import { requireAuth } from "../../middlewares/auth.middleware";
 import { validationMiddleware } from "../../middlewares/validation.middleware";
-import { UpdateUserSchema } from "./users.validator";
+import { UpdateUserOnboardingSchema, UpdateUserSchema } from "./users.validator";
 import { uploadMiddleware } from "../../middlewares/upload.middleware";
 import { validateFileUpload } from "../../middlewares/file-upload.middleware";
 
@@ -13,5 +13,6 @@ userRouter.route("/me").get(usersController.getMe).patch(validationMiddleware("b
 userRouter
   .route("/me/avatar")
   .patch(uploadMiddleware({ type: "single", fieldName: "avatar" }), validateFileUpload("avatar"), usersController.updateAvatar);
+userRouter.route("/me/onboarding").patch(validationMiddleware("body", UpdateUserOnboardingSchema), usersController.updateUserOnboarding);
 
 export default userRouter;
