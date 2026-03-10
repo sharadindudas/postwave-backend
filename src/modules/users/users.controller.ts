@@ -15,36 +15,33 @@ class UsersController {
     const userId = res.locals.user.id;
     const updateUserPayload = res.locals.validatedData as UpdateUserSchema;
 
-    const updatedUser = await usersService.updateMe(userId, updateUserPayload);
+    await usersService.updateMe(userId, updateUserPayload);
 
     res.status(200).json({
       success: true,
-      message: "Updated user details successfully",
-      data: updatedUser
+      message: "Updated user details successfully"
     });
   });
   updateAvatar = AsyncHandler(async (req, res, next) => {
     const avatarImage = res.locals.uploadedFiles?.[0] as Express.Multer.File;
     const currentUser = res.locals.user as typeof users.$inferSelect;
 
-    const updatedUser = await usersService.updateAvatar(currentUser, avatarImage);
+    await usersService.updateAvatar(currentUser, avatarImage);
 
     res.status(200).json({
       success: true,
-      message: "Avatar updated successfully",
-      data: updatedUser
+      message: "Updated avatar successfully"
     });
   });
   updateUserOnboarding = AsyncHandler(async (req, res, next) => {
     const userId = res.locals.user.id;
     const updateUserOnboardingPayload = res.locals.validatedData as UpdateUserOnboardingSchema;
 
-    const updatedUser = await usersService.updateUserOnboarding(userId, updateUserOnboardingPayload);
+    await usersService.updateUserOnboarding(userId, updateUserOnboardingPayload);
 
     res.status(200).json({
       success: true,
-      message: "Updated user onboarding details successfully",
-      data: updatedUser
+      message: "Updated onboarding details successfully"
     });
   });
 }

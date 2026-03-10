@@ -7,8 +7,7 @@ import { deleteFromCloudinary, uploadToCloudinary } from "../../lib/cloudinary";
 
 class UsersService {
   async updateMe(userId: string, updateUserPayload: UpdateUserSchema) {
-    const [updatedUser] = await db.update(users).set(updateUserPayload).where(eq(users.id, userId)).returning();
-    return updatedUser;
+    await db.update(users).set(updateUserPayload).where(eq(users.id, userId));
   }
 
   async updateAvatar(user: typeof users.$inferSelect, file: Express.Multer.File) {
@@ -25,13 +24,11 @@ class UsersService {
       ]
     });
 
-    const [updatedUser] = await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, user.id)).returning();
-    return updatedUser;
+    await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, user.id));
   }
 
   async updateUserOnboarding(userId: string, updateUserOnboardingPayload: UpdateUserOnboardingSchema) {
-    const [updatedUser] = await db.update(users).set(updateUserOnboardingPayload).where(eq(users.id, userId)).returning();
-    return updatedUser;
+    await db.update(users).set(updateUserOnboardingPayload).where(eq(users.id, userId));
   }
 }
 
