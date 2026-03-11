@@ -1,15 +1,13 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db";
 import { users } from "../../db/schema";
-import type { UpdateUserOnboardingSchema, UpdateUserSchema } from "./users.validator";
-import { ErrorHandler } from "../../utils/handlers";
 import { deleteFromCloudinary, uploadToCloudinary } from "../../lib/cloudinary";
+import type { UpdateUserSchema } from "./users.validator";
 
 class UsersService {
   async updateMe(userId: string, updateUserPayload: UpdateUserSchema) {
     await db.update(users).set(updateUserPayload).where(eq(users.id, userId));
   }
-
   async updateAvatar(user: typeof users.$inferSelect, file: Express.Multer.File) {
     if (user.imagePublicId) {
       await deleteFromCloudinary(user.imagePublicId);
@@ -25,10 +23,6 @@ class UsersService {
     });
 
     await db.update(users).set({ image: url, imagePublicId: publicId }).where(eq(users.id, user.id));
-  }
-
-  async updateUserOnboarding(userId: string, updateUserOnboardingPayload: UpdateUserOnboardingSchema) {
-    await db.update(users).set(updateUserOnboardingPayload).where(eq(users.id, userId));
   }
 }
 

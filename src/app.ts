@@ -10,6 +10,7 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import { notfoundMiddleware } from "./middlewares/not-found.middleware";
 import userRouter from "./modules/users/users.routes";
 import healthRouter from "./modules/health/health.routes";
+import publicationRouter from "./modules/publications/publications.route";
 
 const app = express();
 app.use(express.json({ limit: "10mb" }));
@@ -27,10 +28,10 @@ app.use(helmet());
 app.set("trust proxy", true);
 app.use(morganMiddleware);
 
-app.use("/health", healthRouter);
 app.all("/api/v1/auth/*splat", toNodeHandler(auth));
-app.use("/api/v1/users", userRouter);
 app.use("/api/v1/health", healthRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/publications", publicationRouter);
 
 app.use(notfoundMiddleware);
 app.use(errorMiddleware);

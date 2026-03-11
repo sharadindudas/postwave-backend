@@ -60,12 +60,7 @@ export const auth = betterAuth({
       youtube: { type: "string" },
       threads: { type: "string" },
       tiktok: { type: "string" },
-      isOnboarded: { type: "boolean" },
-      onboardingStep: { type: "number" },
-      journey: { type: "string" },
-      platformsUsed: { type: "string" },
-      source: { type: "string" },
-      goals: { type: "string" }
+      isOnboarded: { type: "boolean" }
     }
   },
   advanced: {

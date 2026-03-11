@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { timestamps } from "../common";
 import { publications } from "./publications";
 
@@ -11,5 +11,6 @@ export const publicationDomains = pgTable("publication_domains", {
     .notNull(),
   domain: text("domain").notNull().unique(),
   status: domainStatusEnum("status").default("pending"),
+  is_primary: boolean("is_primary").default(false),
   ...timestamps
 });

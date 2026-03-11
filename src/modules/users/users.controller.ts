@@ -1,7 +1,7 @@
 import type { users } from "../../db/schema";
 import { AsyncHandler } from "../../utils/handlers";
 import { usersService } from "./users.service";
-import type { UpdateUserOnboardingSchema, UpdateUserSchema } from "./users.validator";
+import type { UpdateUserSchema } from "./users.validator";
 
 class UsersController {
   getMe = AsyncHandler(async (req, res, next) => {
@@ -33,17 +33,5 @@ class UsersController {
       message: "Updated avatar successfully"
     });
   });
-  updateUserOnboarding = AsyncHandler(async (req, res, next) => {
-    const userId = res.locals.user.id;
-    const updateUserOnboardingPayload = res.locals.validatedData as UpdateUserOnboardingSchema;
-
-    await usersService.updateUserOnboarding(userId, updateUserOnboardingPayload);
-
-    res.status(200).json({
-      success: true,
-      message: "Updated onboarding details successfully"
-    });
-  });
 }
-
 export const usersController = new UsersController();

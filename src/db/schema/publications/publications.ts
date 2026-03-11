@@ -11,5 +11,7 @@ export const publications = pgTable("publications", {
   description: text("description"),
   logo: text("logo"),
   subdomain: text("subdomain").notNull().unique(),
+  publish_interval: text("publish_interval"),
+  topics: text("topics").array(),
   ...timestamps
 });

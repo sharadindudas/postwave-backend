@@ -17,10 +17,5 @@ export const users = pgTable("users", {
   threads: text("threads"),
   tiktok: text("tiktok"),
   isOnboarded: boolean("is_onboarded").notNull().default(false),
-  onboardingStep: integer("onboarding_step").notNull().default(1),
-  journey: text("journey"),
-  platformsUsed: text("platforms_used"),
-  source: text("source"),
-  goals: text("goals"),
   ...timestamps
 });
